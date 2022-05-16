@@ -14,7 +14,7 @@ for device, group in kode_awalan.jenisDevices:
 ax.grid()
 ax.margins(0.05)
 ax.legend()
-plt.title('Temperatur vs. Humidity')
+plt.title('Temperatur vs. Kelembaban')
 # hanya mengira2 dalam derajat celcius karena suhu ruangan dalam celcius rata2 memang segitu :)
 plt.xlabel('Temperatur (˚C)')
 plt.ylabel('kelembaban (%)')
