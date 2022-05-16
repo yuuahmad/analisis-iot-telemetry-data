@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 # perintah untuk membuat data frame dari data csv yang telah disediakan
 frameData = pd.read_csv('iot_telemetry_data.csv')

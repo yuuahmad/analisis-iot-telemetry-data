@@ -1,32 +1,9 @@
 import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
+import kode_awalan
 
-# konversi ke datetime
-
-
-def parse(x):
-    return pd.to_datetime(x, infer_datetime_format=True, unit='s', utc=True)
-
-
-# perintah untuk membuat data frame dari data csv yang telah disediakan. disini saya membaca hanya sampai 100.000 data saja agar komputer saya cepat menghitung datanya :)
-frameData = pd.read_csv('iot_telemetry_data.csv', nrows=100000, index_col=[
-                        'ts'], infer_datetime_format=True, date_parser=parse)
-# gunakan kode dibawah kalau ingin menampilkan semua datanya (total ada 405184 row data wkwkwk)
-# frameData = pd.read_csv('iot_telemetry_data.csv')
-# ini adalah program untuk menampilkan jumlah data pada terminal
-jumlahdata = frameData["humidity"].index
-print("jumlah data = ", len(jumlahdata))
-# perintah untuk mensorting data
-df = frameData.sort_values(by='ts', ascending=True)
-# mempreview data yang telah dimanipulasi sebelumnya
-print(df.head(5))
-jenisDevices = df.groupby('device')
-# jumlah data per devices
-print('Record count:\n{}'.format(jenisDevices.size()))
 # perintah untuk memploting data dengan sumbu x adalah temperatur dan sumbu y adalah kelembaban
 _, ax = plt.subplots(1, 1, figsize=(18, 9))
-for device, group in jenisDevices:
+for device, group in kode_awalan.jenisDevices:
     ax.plot(group.temp,
             group.humidity,
             marker='o',
@@ -42,3 +19,7 @@ plt.title('Temperatur vs. Humidity')
 plt.xlabel('Temperatur (˚C)')
 plt.ylabel('kelembaban (%)')
 plt.show()
+# dari data yang ditampilkan, bisa disimpulkan kalau:
+# device 00:0f:00:70:91:0a berada pada kondisi yang dingin dan sangat lembab
+# device b8:27:eb:bf:9d:51 berada pada kondisi yang hangat dan kelembaban yang cenderung kering
+# device 1c:bf:ce:15:ec:4d berada dalam kondisi temperatur dan kelembaban yang tidak stabil
